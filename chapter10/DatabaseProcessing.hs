@@ -40,7 +40,7 @@ filterDbDate x = map getUTCTime y
     where y = filter (isDbDate) x
 
 {-
-Write a function that filters for DbNumber values and returns a list of the Integer values inside them.
+2. Write a function that filters for DbNumber values and returns a list of the Integer values inside them.
 filterDbNumber :: [DatabaseItem] -> [Integer]
 filterDbNumber = undefined
 -}
