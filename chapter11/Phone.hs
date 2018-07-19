@@ -1,6 +1,7 @@
 module Phone where
 
 import Data.Char
+import Data.List
 
 
 type Digit = Char
@@ -69,7 +70,7 @@ cellPhonesDead phone (x:xs) = (reverseTaps phone x) ++ cellPhonesDead phone xs
 pressesConversation :: [String] -> [[(Digit, Presses)]]
 pressesConversation s = map (cellPhonesDead myPhone) s
 
--- ######################
+---------------------------
 -- two versions : one using foldr, one recursion
 fingertaps :: [(Digit, Presses)] -> Presses
 fingertaps = foldr (\(_, n) x -> x + n) 0
@@ -78,6 +79,35 @@ fingertaps' :: [(Digit, Presses)] -> Presses
 fingertaps' [] = 0
 fingertaps'( (_ , p):xs ) = p + fingertaps' xs
 
+-- using foldr but more elegant and concise
+fingertaps'' :: [(Digit, Presses)] -> Presses
+fingertaps'' = foldr ((+) . snd) 0
+
+--------------
+mostFrequent :: Ord a => [a] -> (Int, a)
+mostFrequent = maximum . map (\l -> (length l, head l)) . group . sort
 
 mostPopularLetter :: String -> Char
-mostPopularLetter s = undefined
+mostPopularLetter = snd . mostFrequent . map toLower . filter isLetter
+
+-----------------------------
+
+coolestLtr :: [String] -> Char
+coolestLtr = mostPopularLetter . unwords
+
+
+coolestWord :: [String] -> String
+coolestWord = snd . mostFrequent . map (id .  map (\ s -> toLower s))
+-- reduce all string to lowercase
+-- get most frequant in the list of string
+-- get letter
+
+
+
+{-
+import Data.List
+
+answer :: [(String, Int)] -> [(String, Int)]
+answer = map (foo . unzip) . groupBy (\x y -> fst x == fst y) . sort            
+  where foo (names, vals) = (head names, sum vals)
+-}
