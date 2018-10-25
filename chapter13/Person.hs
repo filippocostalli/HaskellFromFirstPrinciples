@@ -34,8 +34,9 @@ gimmePerson = do
     case mkPerson name (read age :: Integer) of
         --Right (Person n a) -> putStrLn $ "Yay! Successfully got a person:" ++ n ++ " " ++ (show a)
         Right p -> putStrLn $ "Yay! Successfully got a person: " ++ (show p)
-        Left NameEmpty -> putStrLn "An error occurred: name empty"
-        Left AgeTooLow -> putStrLn "An error occurred: age too low"
-        Left (PersonInvalidUnknown s) -> putStrLn $ "An error occurred: " ++ s
+        --Left (PersonInvalidUnknown s) -> putStrLn $ "An error occurred: " ++ s
+        --Left NameEmpty -> putStrLn "An error occurred: name empty"
+        --Left AgeTooLow -> putStrLn "An error occurred: age too low"
+        Left s -> putStrLn $ "An error occurred: " ++ (show s)
     return()
 
