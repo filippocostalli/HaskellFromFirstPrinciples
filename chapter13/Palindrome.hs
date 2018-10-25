@@ -2,10 +2,8 @@ import Control.Monad
 import System.Exit (exitSuccess)
 import Data.Char
 
-
 cleanInput :: [Char] -> [Char]
-cleanInput i = map toLower $ filter (\x -> isLetter x || isNumber x) i
-
+cleanInput i = map toLower $ filter (\x -> isLetter x) i
 
 exitPalindrome :: [Char] -> IO ()
 exitPalindrome s =
